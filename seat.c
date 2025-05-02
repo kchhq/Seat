@@ -2,6 +2,6 @@
 
 int main()
 {
-    printf("123124123asfawdsdfa");
+    printf("NMain");
     return 0;
 }
