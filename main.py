@@ -1,23 +1,31 @@
-from typing import Union
+from sqlalchemy.orm import Session
+from fastapi import Depends, HTTPException
+from models import Users
+from database import SessionLocal
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+from datetime import datetime
+def create_user(db: Session, user_name: str, user_password: str,
+                user_number: str, user_email: str):
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    db_user = Users(User_name=user_name, User_password=user_password,
+                    User_number=user_number, User_email=user_email,
+                    Total_used=0, Created_at=now)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+def get_user_id(db: Session, user_id: int):
+    return db.query(Users).filter(Users.User_id == user_id).first()
+
+
 from fastapi import FastAPI
-from pydantic import BaseModel
 
 app = FastAPI()
-
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: Union[bool, None] = None
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello, FastAPI!"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
