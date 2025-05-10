@@ -29,7 +29,7 @@ def test():
 def signup(user: CreateUser, db: Session = Depends(get_db)):
     db_user = create_user(db, user.user_name, user.user_password, 
                           user.user_number, user.user_email)
-    return db_user
+    return {"message": "회원가입 완료", "user": db_user}
 
 @app.post("/login/")
 def login(user: LoginUser, db: Session = Depends(get_db)):
