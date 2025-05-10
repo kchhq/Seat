@@ -27,5 +27,12 @@ def get_user_id(db: Session, user_id: int):
 
 
 from fastapi import FastAPI
+from schemas import CreateUser
 
 app = FastAPI()
+
+@app.post("/signup/")
+def signup(user: CreateUser, db: Session = Depends(get_db)):
+    db_user = create_user(db, user.user_name, user.user_password, 
+                          user.user_number, user.user_email)
+    return db_user
