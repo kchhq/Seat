@@ -1,14 +1,8 @@
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException
 from models import Users
-from database import SessionLocal
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+from database import get_db
+from schemas import CreateUser, LoginUser
 
 from datetime import datetime
 def create_user(db: Session, user_name: str, user_password: str,
@@ -25,14 +19,24 @@ def create_user(db: Session, user_name: str, user_password: str,
 def get_user_id(db: Session, user_id: int):
     return db.query(Users).filter(Users.User_id == user_id).first()
 
-
-from fastapi import FastAPI
-from schemas import CreateUser
-
 app = FastAPI()
+
+@app.get("/")
+def test():
+    return {"message": "Hello World"}
 
 @app.post("/signup/")
 def signup(user: CreateUser, db: Session = Depends(get_db)):
     db_user = create_user(db, user.user_name, user.user_password, 
                           user.user_number, user.user_email)
     return db_user
+
+@app.post("/login/")
+def login(user: LoginUser, db: Session = Depends(get_db)):
+    db_user = db.query(Users).filter(Users.User_email == user.user_email).first()
+    
+    if db_user is None:
+        raise HTTPException(status_code=401, detail="존재하지 않음 회원가입 ㄱㄱ")
+    elif db_user.User_password != user.uer_password:
+        raise HTTPException(status_code=401, detail="비밀번호 틀림")
+    return {"message": "로그인 성공", "user_id": db_user.User_id}
