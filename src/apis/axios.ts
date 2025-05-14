@@ -17,6 +17,12 @@ export const axiosInstance = axios.create({
   withCredentials: true, // 쿠키를 요청에 포함
 });
 
+// // axios 인스턴스 생성
+// export const axiosInstance = axios.create({
+//   baseURL: import.meta.env.VITE_SERVER_API_URL, // .env에 정의된 백엔드 API 주소
+//   withCredentials: true, // 쿠키를 요청에 포함
+// });
+
 // 요청 인터셉터 설정 (모든 요청 전에 실행됨)
 axiosInstance.interceptors.request.use(
   (config) => {
