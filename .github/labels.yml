@@ -1,0 +1,16 @@
+# .github/labels.yml
+- name: bug
+  color: d73a4a
+  description: 작동하지 않는 기능 또는 버그
+
+- name: feature
+  color: 0e8a16
+  description: 새로운 기능 요청
+
+- name: documentation
+  color: 0075ca
+  description: 문서 관련 작업
+
+- name: refactor
+  color: cfd3d7
+  description: 기능 변경 없이 코드 개선
