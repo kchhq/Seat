@@ -3,8 +3,9 @@ from fastapi import FastAPI, Depends, HTTPException
 from models import Users
 from database import get_db
 from schemas import CreateUser, LoginUser
+from auth import create_token, verify_token
+from datetime import datetime, timedelta
 
-from datetime import datetime
 def create_user(db: Session, user_name: str, user_password: str,
                 user_number: str, user_email: str):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -39,4 +40,9 @@ def login(user: LoginUser, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="존재하지 않음 회원가입 ㄱㄱ")
     elif db_user.User_password != user.uer_password:
         raise HTTPException(status_code=401, detail="비밀번호 틀림")
-    return {"message": "로그인 성공", "user_id": db_user.User_id}
+    
+    access_token = create_token(data={"user_id": db_user.User_id},
+                                expires_delta=timedelta(minutes=15))
+    
+    return {"message": "로그인 성공", 
+            "access_token": access_token}
