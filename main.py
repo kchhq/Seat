@@ -6,11 +6,10 @@ from schemas import CreateUser, LoginUser
 from auth import create_token, verify_token
 from datetime import datetime, timedelta
 
-def create_user(db: Session, user_name: str, user_password: str,
-                user_number: str, user_email: str):
+def create_user(db: Session, user: CreateUser):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    db_user = Users(User_name=user_name, User_password=user_password,
-                    User_number=user_number, User_email=user_email,
+    db_user = Users(User_name=user.user_name, User_password=user.user_password,
+                    User_number=user.user_number, User_email=user.user_email,
                     Total_used=0, Created_at=now)
     db.add(db_user)
     db.commit()
@@ -28,8 +27,7 @@ def test():
 
 @app.post("/signup/")
 def signup(user: CreateUser, db: Session = Depends(get_db)):
-    db_user = create_user(db, user.user_name, user.user_password, 
-                          user.user_number, user.user_email)
+    db_user = create_user(db, user)
     return {"message": "회원가입 완료", "user": db_user}
 
 @app.post("/login/")
