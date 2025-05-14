@@ -1,50 +1,34 @@
-# Welcome to your Expo app 👋
+# 📌 프로젝트명: SMP
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> 지역 기반 정보 공유 및 채팅 서비스 (React + Kakao Map API)
 
-## Get started
+## 🔍 소개
 
-1. Install dependencies
+**SMP**는 사용자의 위치 기반으로 지역 정보를 공유하고,  
+실시간 채팅을 통해 소통할 수 있는 커뮤니티 플랫폼입니다.  
+비 오는 날 잠깐 비추는 햇살처럼, 일상 속 따뜻한 연결을 제공합니다.
 
-   ```bash
-   npm install
-   ```
+## 🛠️ 주요 기능
 
-2. Start the app
+- 📍 **카카오 맵 기반 위치 검색**
+- 🧵 **동네 채팅방 생성 및 참여**
+- 💬 **실시간 채팅 기능 (socket.io 예정)**
+- 📝 **게시글 및 댓글 기능**
+- 📱 **반응형 디자인**
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📁 폴더 구조
 
 ```bash
-npm run reset-project
+WEB_A/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── api/
+│   └── App.tsx
+├── .env
+├── package.json
+└── README.md
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 제경 작업 반영 테스트
