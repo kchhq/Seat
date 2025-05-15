@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, Enum, ForeignKey, DateTime, Time, Date
 from sqlalchemy.orm import relationship
-from db import Base
+from .db import Base
 import enum
 from datetime import datetime
 
@@ -14,10 +14,10 @@ class ReservationStatus(enum.Enum):
 class User(Base):
     __tablename__ = "USER_info"
 
-    USER_id = Column(String(20), primary_key=True, index=True)
-    USER_password = Column(String(20), index=True, nullable=False)
+    USER_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    USER_password = Column(String(100), index=True, nullable=False)
     USER_email = Column(String(50), index=True, nullable=False)
-    USER_studentnumber = Column(Integer, index=True, nullable=True)
+    USER_studentid = Column(Integer, index=True, nullable=False)
     USER_name = Column(String(10), index=True, nullable=False)
     TOTAL_used = Column(Time, index=True, nullable=True)
     SIGNUP_time = Column(DateTime, index=True, nullable=True)
@@ -60,4 +60,3 @@ class Reservation(Base):
 
     user = relationship("User", back_populates="reservations")
     seat = relationship("Seat", back_populates="reservations")
-
