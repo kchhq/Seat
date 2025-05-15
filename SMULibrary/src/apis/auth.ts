@@ -5,7 +5,8 @@
 // => email, password를 보내고, 서버에게 acessToken을 받음
 import {
   RequestSigninDto, // 로그인 요청 시 필요한 데이터 타입 (email, password 등)
-  RequestSignupDto, // 회원가입 요청 시 필요한 데이터 타입
+  RequestSignupDto,
+  ResponseMyInfoDto, // 회원가입 요청 시 필요한 데이터 타입
   ResponseSigninDto, // 로그인 응답 데이터 타입 (ex: accessToken)
   ResponseSignupDto, // 회원가입 응답 데이터 타입
 } from '../types/auth';
@@ -30,5 +31,10 @@ export const postSignin = async (body: RequestSigninDto): Promise<ResponseSignin
 export const postLogout = async () => {
   const { data } = await axiosInstance.post('/v1/auth/signout');
 
+  return data;
+};
+
+export const getMyInfo = async (): Promise<ResponseMyInfoDto> => {
+  const { data } = await axiosInstance.get('/v1/users/me');
   return data;
 };

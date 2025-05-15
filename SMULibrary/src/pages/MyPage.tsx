@@ -13,23 +13,25 @@ const MyPage = () => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result as string); // 미리보기 설정
-      setValue('thumbnail', reader.result as string); // form 필드에 반영
+      // setValue('thumbnail', reader.result as string); // form 필드에 반영
     };
     reader.readAsDataURL(file); // base64 변환
   };
 
+  // 로그아웃 넣어야 함
+
   return (
     <div>
-      {/* LP 썸네일 */}
-      <div className="relative w-60 h-60 rounded overflow-hidden">
-        {/* 기본 LP 이미지 (항상 표시) */}
+      {/* 프로필 */}
+      <div className="relative w-60 h-60 rounded-full overflow-hidden">
+        {/* 기본 프로필 이미지 */}
         <img src={Profile} alt="기본 LP" className="w-full h-full object-cover" />
 
         {/* 업로드된 썸네일이 있을 경우 위에 덮어쓰기 */}
         {preview && (
           <img
             src={preview}
-            alt="업로드 썸네일"
+            alt="profilePreview"
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
         )}

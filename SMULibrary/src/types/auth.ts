@@ -30,6 +30,7 @@ export const signupSchema = z
 
 export type SignupFormFields = z.infer<typeof signupSchema>;
 
+// [회원가입] 백 -> 서버 (이름 맞춤)
 export type RequestSignupDto = {
   user_name: string;
   user_number: string;
@@ -44,6 +45,7 @@ export type ResponseSignupDto = CommonResponse<{
   password: string;
 }>;
 
+// [로그인] 백 -> 서버 (이름 맞춤)
 export type RequestSigninDto = {
   user_email: string;
   user_password: string;
@@ -58,6 +60,14 @@ export type ResponseSigninDto = CommonResponse<{
     email: string;
     studentId: string;
   };
+}>;
+
+// [내 정보 조회] 할 때 받는 응답 타입 : 로그인된 사용자의 정보 상세
+export type ResponseMyInfoDto = CommonResponse<{
+  id: number;
+  name: string;
+  email: string;
+  createdAt: Date;
 }>;
 
 // ----------------------
