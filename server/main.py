@@ -26,7 +26,7 @@ app.add_middleware(
 app.include_router(auth_router.router, prefix="/v1/auth")
 
 # 테이블 생성
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 # 기본 루트 테스트용 엔드포인트
 @app.get("/")

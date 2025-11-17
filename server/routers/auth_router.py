@@ -3,10 +3,9 @@ from sqlalchemy.orm import Session
 from schemas import CreateUser, LoginUser
 from database import get_db
 from models import Users
-from utils.auth import create_token
+from utils.auth import create_token, get_current_user
 from datetime import datetime, timedelta
 from schemas import UserInfoResponse  
-from utils.auth import get_current_user
 
 router = APIRouter()
 
